@@ -38,7 +38,8 @@ module.exports = function(db) {
 
   //Add in our routes
   require('../app/routes/player.server.routes.js')(app);
-  
+  require('../app/routes/game.server.routes.js')(app);
+
   //TODO: Turn this back on when I have angular stuff to show
   app.use(express.static('./public'));
 
