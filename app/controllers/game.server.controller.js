@@ -79,7 +79,8 @@ exports.delete = function (req, res, next) {
 * Finds a game in the database with the given id
 **/
 exports.gameById = function (req, res, next, id) {
-  Player.findOne({
+  console.log('game.gameById'.debug);
+  Game.findOne({
     _id : id
   }, function(err, game) {
       if (err) {

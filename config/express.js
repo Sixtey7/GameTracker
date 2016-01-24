@@ -40,6 +40,11 @@ module.exports = function(db) {
   require('../app/routes/player.server.routes.js')(app);
   require('../app/routes/game.server.routes.js')(app);
 
+  //Routes for scores
+  require('../app/routes/singlescore.server.routes.js')(app);
+  require('../app/routes/rangescore.server.routes.js')(app);
+  require('../app/routes/multiscore.server.routes.js')(app);
+
   //TODO: Turn this back on when I have angular stuff to show
   app.use(express.static('./public'));
 

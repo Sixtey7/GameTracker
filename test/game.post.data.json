@@ -1,0 +1,6 @@
+{
+  "name" : "Agricola",
+  "minNumPlayers" : 2,
+  "maxNumPlayers" : 6,
+  "scoringSystem" : "Single"
+}
