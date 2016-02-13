@@ -7,7 +7,7 @@ var GameSchema = new Schema({
   maxNumPlayers : Number,
   scoringSystem : {
     type : String,
-    enum : ['Single', 'Range', 'Multi']
+    enum : ['Single', 'Range', 'Multi', 'Complex']
   }
 });
 

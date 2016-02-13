@@ -7,10 +7,19 @@ var RangeScoreEntrySchema = new Schema({
 });
 
 var RangeScoreSchema = new Schema({
+  name : String,
   game : Schema.ObjectId,
   sequence : Number,
-  name : String,
   ranges : [RangeScoreEntrySchema]
+});
+
+RangeScoreSchema.virtual('type').get(function() {
+  return 'Range';
+});
+
+RangeScoreSchema.set('toJSON', {
+  virtuals : true,
+  getters : true
 });
 
 mongoose.model('RangeScore', RangeScoreSchema);

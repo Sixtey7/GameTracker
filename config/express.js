@@ -32,11 +32,11 @@ module.exports = function(db) {
   app.use(bodyParser.json());
   app.use(methodOverride());
 
-  //TODO: Turn these on when I have views to show
-  //app.set('views', './app/views');
-  //app.set('view engine', 'ejs');
+  app.set('views', './app/views');
+  app.set('view engine', 'ejs');
 
   //Add in our routes
+  require('../app/routes/index.server.routes.js')(app);
   require('../app/routes/player.server.routes.js')(app);
   require('../app/routes/game.server.routes.js')(app);
 
@@ -44,6 +44,7 @@ module.exports = function(db) {
   require('../app/routes/singlescore.server.routes.js')(app);
   require('../app/routes/rangescore.server.routes.js')(app);
   require('../app/routes/multiscore.server.routes.js')(app);
+  require('../app/routes/score.server.routes.js')(app);
 
   //TODO: Turn this back on when I have angular stuff to show
   app.use(express.static('./public'));

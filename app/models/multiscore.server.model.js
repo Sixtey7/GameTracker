@@ -10,4 +10,13 @@ var MultiScoreSchema = new Schema({
   maxIterations : Number
 });
 
+MultiScoreSchema.virtual('type').get(function() {
+  return 'Multi';
+});
+
+MultiScoreSchema.set('toJSON', {
+  virtuals : true,
+  getters : true
+});
+
 mongoose.model('MultiScore', MultiScoreSchema);

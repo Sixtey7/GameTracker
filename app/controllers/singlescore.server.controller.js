@@ -141,3 +141,16 @@ exports.singleScoresForGame = function(req, res, next, gameId) {
     }
   });
 };
+
+/**
+* Finds all of the single scores associated with the provided game id)
+**/
+exports.singleScoreForGameId = function(gameId, callback) {
+  console.log(('Looking for single scores for game id: ' + gameId).debug);
+
+  SingleScore.find({
+    game : gameId
+  }, function(err, result) {
+    callback(err, result);
+  });
+};

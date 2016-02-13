@@ -48,7 +48,7 @@ exports.create = function(req, res, next) {
       return next(err);
     }
     else {
-      res.json(player);
+      res.json(rangeScore);
     }
   });
 };
@@ -137,5 +137,19 @@ exports.rangeScoresForGame = function(req, res, next, gameId) {
       req.rangeScoreList = matchingRangeScores;
       next();
     }
+  });
+};
+
+
+/**
+* Finds all of the range scores associated with the provided game id)
+**/
+exports.rangeScoreForGameId = function(gameId, callback) {
+  console.log(('Looking for range scores for game id: ' + gameId).debug);
+
+  RangeScore.find({
+    game : gameId
+  }, function(err, result) {
+    callback(err, result);
   });
 };

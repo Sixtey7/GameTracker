@@ -5,7 +5,7 @@ module.exports = function (app) {
     .get(rangeScores.list)
     .post(rangeScores.create);
 
-  app.route('/api/rangeScores/:singleScoreId')
+  app.route('/api/rangeScores/:rangeScoreId')
     .get(rangeScores.read)
     .put(rangeScores.update)
     .delete(rangeScores.delete);

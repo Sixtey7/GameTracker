@@ -48,7 +48,7 @@ exports.create = function(req, res, next) {
       return next(err);
     }
     else {
-      res.json(player);
+      res.json(multiScore);
     }
   });
 };
@@ -79,7 +79,7 @@ exports.listForGameId = function(req, res) {
 * Update
 **/
 exports.update = function(req, res, next) {
-  MultiScore.findByIdAndUpdate(req.MultiScore.id, req.body, function(err, multiScore) {
+  MultiScore.findByIdAndUpdate(req.multiScore.id, req.body, function(err, multiScore) {
     if (err) {
       return next(err);
     }
@@ -93,7 +93,7 @@ exports.update = function(req, res, next) {
 * Delete
 **/
 exports.delete = function(req, res, next) {
-  req.MultiScore.remove(function(err) {
+  req.multiScore.remove(function(err) {
     if (err) {
       return next(err);
     }
@@ -137,5 +137,18 @@ exports.multiScoresForGame = function(req, res, next, gameId) {
       req.multiScoreList = matchingMultiScores;
       next();
     }
+  });
+};
+
+/**
+ * Finds all of the multi scores associated with the provided game id)
+ **/
+exports.multiScoreForGameId = function(gameId, callback) {
+  console.log(('Looking for multi scores for game id: ' + gameId).debug);
+
+  MultiScore.find({
+    game : gameId
+  }, function(err, result) {
+    callback(err, result);
   });
 };
