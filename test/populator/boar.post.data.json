@@ -1,0 +1,27 @@
+{
+  "name" : "Boar",
+  "game" : "56b8fb04a87bd8050bde9be3",
+  "sequence" : 6,
+  "ranges" : [
+    {
+      "value" : 0,
+      "score" : -1
+    },
+    {
+      "value" : 1,
+      "score" : 1
+    },
+    {
+      "value" : 3,
+      "score" : 2
+    },
+    {
+      "value" : 5,
+      "score" : 3
+    },
+    {
+      "value" : 7,
+      "score" : 4
+    }
+  ]
+}

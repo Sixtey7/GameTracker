@@ -1,0 +1,27 @@
+{
+  "name" : "Pasture",
+  "game" : "56b8fb04a87bd8050bde9be3",
+  "sequence" : 2,
+  "ranges" : [
+    {
+      "value" : 0,
+      "score" : -1
+    },
+    {
+      "value" : 1,
+      "score" : 1
+    },
+    {
+      "value" : 2,
+      "score" : 2
+    },
+    {
+      "value" : 3,
+      "score" : 3
+    },
+    {
+      "value" : 4,
+      "score" : 4
+    }
+  ]
+}

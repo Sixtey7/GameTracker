@@ -1,0 +1,25 @@
+<section data-ng-controller="GamesController" data-ng-init="findOne()">
+  <h1 data-ng-bind="game.name"></h1>
+  <div>
+    <p>
+      <div>Min Num Players</div>
+      <div data-ng-bind="game.minNumPlayers"></div>
+    </p>
+
+    <p>
+      <div>Max Num Players</div>
+      <div data-ng-bind="game.maxNumPlayers"></div>
+    </p>
+
+    <div data-ng-controller="ScoresController" data-ng-init="findScoresForGame()">
+      <ul>
+        <li data-ng-repeat = "score in scores">
+          <small data-ng-bind="score.name"></small>
+          <small data-ng-bind="score.type"></small>
+          <div name="rangeScoreDiv" ng-if="score.type == 'Range'">
+            <em>I'm a range!</em>
+          </div>
+        </li>
+      </ul>
+  </div>
+</section>

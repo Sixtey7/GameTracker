@@ -1,0 +1,14 @@
+<section data-ng-controller = "GamesController" data-ng-init = "find()">
+  <h1>Games</h1>
+  <ul>
+    <li data-ng-repeat = "game in games">
+      <a data-ng-href = "#!/games/{{game._id}}" data-ng-bind="game.name"></a>
+      <br>
+      <small data-ng-bind="game.name"></small>
+    </li>
+  </ul>
+  <div data-ng-hide = "!games || games.length">
+    No Games In The Database!
+    <!--TODO: Add a link here to add game -->
+  </div>
+</section>

@@ -1,0 +1,82 @@
+{
+  "name" : "Agricola",
+  "minNumPlayers" : 2,
+  "maxNumPlayers" : 6,
+  "scoringSystem" : "Multi",
+  "scoring" : [
+    "field" : {
+      "type" : "Range",
+      "rangeScores" : [
+        {
+          "value" : 0,
+          "score" : -1
+        },
+        {
+          "value" : 2,
+          "score" : 1
+        },
+        {
+          "value" : 3,
+          "score" : 2
+        },
+        {
+          "value" : 4,
+          "score" : 3
+        },
+        {
+          "value" : 5,
+          "score" : 4
+        }
+      ]
+    },
+    "sheep" : {
+      "type" : "Range",
+      "rangeScores" : [
+        {
+          "value" : 0,
+          "score" : -1
+        },
+        {
+          "value" : 1,
+          "score" : 1
+        }
+      ]
+    }
+  ]
+};
+
+
+
+{
+  "name" : "Agricola",
+  "minNumPlayers" : 2,
+  "maxNumPlayers" : 5
+};
+
+{
+  "name" : "Fields",
+  "game" : 12345,
+  "sequence" : 1,
+  "ranges" : [
+    {
+      "value" : 0,
+      "score" : -1
+    },
+    {
+      "value" : 2,
+      "score" : 1
+    },
+    {
+      "value" : 3,
+      "score" : 2
+    },
+    {
+      "value" : 4,
+      "score" : 3
+    },
+    {
+      "value" : 5,
+      "score" : 4
+    }
+  ]
+}

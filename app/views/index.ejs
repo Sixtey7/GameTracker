@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:ng = "http://angularjs.org">
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <section ng-view></section>
+
+    <script type="text/javascript">console.log("Hello World");</script>
+    <!-- Add in the dependencies -->
+    <script type="text/javascript"
+      src = "lib/angular/angular.js"></script>
+
+    <script type="text/javascript"
+      src = "lib/angular-route/angular-route.js"></script>
+
+    <script type="text/javascript"
+      src = "lib/angular-resource/angular-resource.js"></script>
+
+    <!-- Add in the resources for games -->
+    <script type = "text/javascript"
+      src = "/games/games.client.module.js"></script>
+
+    <script type = "text/javascript"
+      src = "/games/config/games.client.routes.js"></script>
+
+    <script type = "text/javascript"
+      src = "/games/controllers/games.client.controller.js"></script>
+
+    <script type = "text/javascript"
+      src = "/games/controllers/games.scores.client.controller.js"></script>
+
+    <script type = "text/javascript"
+      src = "/games/services/games.client.service.js"></script>
+
+    <script type = "text/javascript"
+      src = "/games/services/games.scores.client.service.js"></script>
+      
+    <!-- Add in the Application.js -->
+    <script type = "text/javascript"
+      src = "application.js"></script>
+  </body>
+</html>

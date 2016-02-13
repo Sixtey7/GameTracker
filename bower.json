@@ -1,0 +1,17 @@
+{
+  "name": "Game-Tracker",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-route": "~1.2",
+    "angular-resource": "~1.2"
+  },
+  "homepage": "https://github.com/Sixtey7/GameTracker",
+  "authors": [
+    "Patrick Shaw <sixtey7@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT"
+}

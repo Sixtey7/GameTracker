@@ -1,0 +1,27 @@
+{
+  "name" : "Grain",
+  "game" : "56b8fb04a87bd8050bde9be3",
+  "sequence" : 3,
+  "ranges" : [
+    {
+      "value" : 0,
+      "score" : -1
+    },
+    {
+      "value" : 1,
+      "score" : 1
+    },
+    {
+      "value" : 4,
+      "score" : 2
+    },
+    {
+      "value" : 6,
+      "score" : 3
+    },
+    {
+      "value" : 8,
+      "score" : 4
+    }
+  ]
+}
