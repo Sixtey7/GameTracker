@@ -1,4 +1,4 @@
-angular.module('games').controller('ScoresController', ['$scope', '$routeParams', '$location', 'ScoresService',
+angular.module('games').controller('GameScoresController', ['$scope', '$routeParams', '$location', 'ScoresService',
   function($scope, $routeParams, $location, ScoresService) {
 
     /**

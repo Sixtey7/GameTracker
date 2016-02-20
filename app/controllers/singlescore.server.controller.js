@@ -154,3 +154,14 @@ exports.singleScoreForGameId = function(gameId, callback) {
     callback(err, result);
   });
 };
+
+/**
+ * Finds all of the multi scores
+ **/
+exports.findAll = function (callback) {
+  SingleScore.find({
+
+  }, function(err, result) {
+    callback(err, result);
+  });
+};

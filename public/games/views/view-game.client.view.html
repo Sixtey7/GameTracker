@@ -1,25 +1,55 @@
 <section data-ng-controller="GamesController" data-ng-init="findOne()">
-  <h1 data-ng-bind="game.name"></h1>
-  <div>
-    <p>
-      <div>Min Num Players</div>
-      <div data-ng-bind="game.minNumPlayers"></div>
-    </p>
+    <h1 data-ng-bind="game.name"></h1>
+    <div>
+        <p>
+        <div>Min Num Players</div>
+        <div data-ng-bind="game.minNumPlayers"></div>
+        </p>
 
-    <p>
-      <div>Max Num Players</div>
-      <div data-ng-bind="game.maxNumPlayers"></div>
-    </p>
+        <p>
+        <div>Max Num Players</div>
+        <div data-ng-bind="game.maxNumPlayers"></div>
+        </p>
 
-    <div data-ng-controller="ScoresController" data-ng-init="findScoresForGame()">
-      <ul>
-        <li data-ng-repeat = "score in scores">
-          <small data-ng-bind="score.name"></small>
-          <small data-ng-bind="score.type"></small>
-          <div name="rangeScoreDiv" ng-if="score.type == 'Range'">
-            <em>I'm a range!</em>
-          </div>
-        </li>
-      </ul>
-  </div>
+        <div data-ng-controller="GameScoresController" data-ng-init="findScoresForGame()">
+            <ul>
+                <li data-ng-repeat="score in scores">
+                    <div ng-if = "score.name">
+                        <h3 data-ng-bind="score.name"></h3>
+                        <div ng-switch="score.type">
+                            <div name="rangeScoreDiv" ng-switch-when="Range">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>Score</th>
+                                        <th>Value</th>
+                                    </tr>
+                                    </thead>
+                                    <tr ng-repeat="range in score.ranges">
+                                        <td data-ng-bind="range.score"></td>
+                                        <td data-ng-bind="range.value"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div name="multiScoreDiv" ng-switch-when="Multi">
+                                <table>
+                                    <tr>
+                                        <th>Multiplier</th>
+                                        <td data-ng-bind="score.multiplier"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Has Max</th>
+                                        <td data-ng-bind="score.hasMax"></td>
+                                    </tr>
+                                    <tr ng-if = "score.hasMax">
+                                        <th>Max Iterations</th>
+                                        <td data-ng-bind="score.maxIterations"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 </section>

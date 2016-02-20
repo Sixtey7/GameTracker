@@ -153,3 +153,14 @@ exports.rangeScoreForGameId = function(gameId, callback) {
     callback(err, result);
   });
 };
+
+/**
+ * Finds all of the multi scores
+ **/
+exports.findAll = function (callback) {
+  RangeScore.find({
+
+  }, function(err, result) {
+    callback(err, result);
+  });
+};

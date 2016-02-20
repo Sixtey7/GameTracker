@@ -1,6 +1,6 @@
-angular.module('scores').factory('RangeScores', ['$resource', '$http',
+angular.module('scores').factory('Scores', ['$resource', '$http',
   function($resource, $http) {
-    var rangeScore = $resource('/api/rangeScores/:rangeScoreId', {
+    var rangeScore = $resource('/api/scores/:scoreId', {
       rangeScoreId : '@_id'
     }, {
       update : {
@@ -9,7 +9,7 @@ angular.module('scores').factory('RangeScores', ['$resource', '$http',
   });
 
   rangeScore.scoresForGame = function(gameId) {
-    $http.get('/api/rangeScores/game/' + gameId)
+    $http.get('/api/scores/game/' + gameId)
       .success(function(data) {
         return data;
       });

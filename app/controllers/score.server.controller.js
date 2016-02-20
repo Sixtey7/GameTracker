@@ -13,7 +13,7 @@ require('../../config/colors');
  */
 exports.listForGameId = function(req, res) {
     res.json(req.scoreList);
-}
+};
 
 /**
 * Method To Get All Scores For A Game
@@ -41,12 +41,58 @@ exports.findAllScoresForGame = function(req, res, next, gameId) {
             console.log(('Got an error attempting to retrieve all score types for game id: ' + gameId + '\n' + err).error);
         }
         else {
+            //first combine all of the arrays into a single array
+            var fullScoreArray = result.SINGLE.concat(result.MULTI, result.RANGE);
 
-            console.log(('Logging response from findAllScoresForGame').debug);
-            console.log((JSON.stringify(result.SINGLE)).debug);
+            //now let's build a sorted array that has all of the elements in sequence number
+            var sortedScoreArray = new Array();
+            for (var i = 0; i < fullScoreArray.length; i++) {
+                sortedScoreArray[fullScoreArray[i].sequence] = fullScoreArray[i];
+            }
 
-            req.scoreList = result.SINGLE.concat(result.MULTI, result.RANGE);
-            //req.scoreList = result;
+            //last, remove any undefined elements (due to gaps in the sequence)
+            req.scoreList = sortedScoreArray.filter(function(n) { return n != undefined });
+
+            if (req.scoreList.length < sortedScoreArray.length) {
+                console.log(('WARNING: The size of the final list is smaller than the sorted list ' +
+                    '- there are gaps in the data!').warn);
+            }
+            next();
+        }
+    });
+};
+
+/**
+ * Method that will find all scores
+ */
+exports.findAllScores = function(req, res, next) {
+    async.parallel({
+        'SINGLE' : function(callback) {
+            SingleScoreController.findAll(function(err, response) {
+                callback(err, response);
+            })
+        },
+        'MULTI' : function(callback) {
+            MultiScoreController.findAll(function(err, response) {
+                callback(err, response);
+            })
+        },
+        'RANGE' : function(callback) {
+            RangeScoreController.findAll(function(err, response) {
+                callback(err, response);
+            })
+        }
+    },
+    function (err, result) {
+        if (err) {
+            console.log(('Got an error trying to findAllScores: ' + err).error);
+        }
+        else {
+            console.log(('About to log the result from findAllScores').debug);
+            console.log((JSON.stringify(result)).debug);
+            var combinedList = result.SINGLE.concat(result.MULTI, result.RANGE);
+
+            res.json(combinedList);
             next();
         }
     });
