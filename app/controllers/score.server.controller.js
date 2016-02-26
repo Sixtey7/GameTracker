@@ -97,3 +97,39 @@ exports.findAllScores = function(req, res, next) {
         }
     });
 };
+
+exports.updateScores = function (req, res, next) {
+  if (req.body !== undefined) {
+    var scores = req.body;
+    console.log(('Got the following scores in updateScores:\n' + JSON.stringify(scores)).debug);
+
+    var singleScores = new Array();
+    var rangeScores = new Array();
+    var multiScores = new Array();
+
+    for (var i = 0; i < scores.length; i++) {
+      var score = scores[i];
+
+      switch (score.type) {
+        case 'Single' :
+          singleScores.push(score);
+          break;
+        case 'Range' :
+          rangeScores.push(score);
+          break;
+        case 'Multi' :
+          multiScores.push(score);
+          break;
+      }
+
+      /* DEBUG BLOCK */
+      console.log(('----------\nSingle Scores----------\n' + JSON.stringify(singleScores) + '\n').debug);
+      console.log(('----------\nRange Scores----------\n' + JSON.stringify(rangeScores) + '\n').debug);
+      console.log(('----------\nMulti Scores----------\n' + JSON.stringify(multiScores) + '\n').debug);
+      /* END DEBUG BLOCK */
+      if (singleScores.length > 0) {
+        SingleScoreController.
+      }
+    }
+  }
+};
