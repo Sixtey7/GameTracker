@@ -1,9 +1,10 @@
 {
-  "game" : "56b8fb04a87bd8050bde9be3",
+  "game" : "56db0f22ccb783c611bf757d",
   "sequence" : 11,
   "name" : "Stone House",
   "multiplier" : 2,
   "hasMax" : false,
-  "maxIterations" : null
+  "maxIterations" : null,
+  "type" : "Multi"
 
 }

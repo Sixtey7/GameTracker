@@ -100,7 +100,7 @@ exports.findAllScores = function (req, res, next) {
         });
 };
 
-exports.updateScores = function (req, res, next) {
+exports.createOrUpdateScores = function (req, res, next) {
     if (req.body !== undefined) {
         var scores = req.body;
         console.log(('Got the following scores in updateScores:\n' + JSON.stringify(scores)).debug);
@@ -109,60 +109,86 @@ exports.updateScores = function (req, res, next) {
         var rangeScores = new Array();
         var multiScores = new Array();
 
-        for (var i = 0; i < scores.length; i++) {
-            var score = scores[i];
+        if (scores.constructor === Array) {
+            console.log(('Determined to be an array!').debug);
+            for (var i = 0; i < scores.length; i++) {
+                var score = scores[i];
 
-            switch (score.type) {
+                switch (score.type) {
+                    case 'Single' :
+                        singleScores.push(score);
+                        break;
+                    case 'Range' :
+                        rangeScores.push(score);
+                        break;
+                    case 'Multi' :
+                        multiScores.push(score);
+                        break;
+                    default :
+                        console.log(('Type in array did not have a type on it!').warn);
+
+                }
+            }
+        }
+        else {
+            console.log(('Determined not be an array!').debug);
+            switch(scores.type) {
                 case 'Single' :
-                    singleScores.push(score);
+                    singleScores.push(scores);
                     break;
                 case 'Range' :
-                    rangeScores.push(score);
+                    rangeScores.push(scores);
                     break;
                 case 'Multi' :
-                    multiScores.push(score);
+                    multiScores.push(scores);
                     break;
+                default :
+                    console.log(('Single value did not have a type on it!').warn);
             }
+        }
 
-            /* DEBUG BLOCK */
-            console.log(('----------\nSingle Scores----------\n' + JSON.stringify(singleScores) + '\n').debug);
-            console.log(('----------\nRange Scores----------\n' + JSON.stringify(rangeScores) + '\n').debug);
-            console.log(('----------\nMulti Scores----------\n' + JSON.stringify(multiScores) + '\n').debug);
-            /* END DEBUG BLOCK */
-            async.parallel({
-                    'SINGLE': function (callback) {
-                        if (singleScores.length > 0) {
-                            SingleScoreController.createOrUpdateCollection(singleScores, callback);
-                        }
-                        else {
-                            callback();
-                        }
-                    },
-                    'MULTI': function (callback) {
-                        if (multiScores.length > 0) {
-                            MultiScoreController.createOrUpdateCollection(multiScores, callback);
-                        }
-                        else {
-                            callback();
-                        }
-                    },
-                    'RANGE': function (callback) {
-                        if (rangeScores.length > 0) {
-                            RangeScoreController.createOrUpdateCollection(rangeScores, callback);
-                        }
-                        else {
-                            callback();
-                        }
-                    }
-                },
-                function (err, result) {
-                    if (err) {
-                        console.log(('Got an error trying to saveAllScores: ' + err).error);
+
+        /* DEBUG BLOCK */
+        console.log(('----------\nSingle Scores\n----------\n' + JSON.stringify(singleScores) + '\n').debug);
+        console.log(('----------\nRange Scores\n----------\n' + JSON.stringify(rangeScores) + '\n').debug);
+        console.log(('----------\nMulti Scores\n----------\n' + JSON.stringify(multiScores) + '\n').debug);
+        /* END DEBUG BLOCK */
+        async.parallel({
+                'SINGLE': function (callback) {
+                    if (singleScores.length > 0) {
+                        SingleScoreController.createOrUpdateCollection(singleScores, callback);
                     }
                     else {
-                        console.log(('Successfully saved all scores!').debug);
+                        callback();
                     }
-                });
-        }
+                },
+                'MULTI': function (callback) {
+                    if (multiScores.length > 0) {
+                        MultiScoreController.createOrUpdateCollection(multiScores, callback);
+                    }
+                    else {
+                        callback();
+                    }
+                },
+                'RANGE': function (callback) {
+                    if (rangeScores.length > 0) {
+                        RangeScoreController.createOrUpdateCollection(rangeScores, callback);
+                    }
+                    else {
+                        callback();
+                    }
+                }
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(('Got an error trying to saveAllScores: ' + err).error);
+                    next();
+                }
+                else {
+                    console.log(('Successfully saved all scores!').debug);
+                    console.log(('Got the result: ' + JSON.stringify(result)).debug);
+                    next();
+                }
+            });
     }
 };

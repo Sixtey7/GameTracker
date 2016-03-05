@@ -1,6 +1,8 @@
 var RangeScore = require('mongoose').model('RangeScore');
 require('../../config/colors');
 
+var async = require('async');
+
 /**
  * Utility Method used to retrieve an error
  **/

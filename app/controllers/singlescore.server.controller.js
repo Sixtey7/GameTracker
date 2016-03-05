@@ -1,6 +1,8 @@
 var SingleScore = require('mongoose').model('SingleScore');
 require('../../config/colors');
 
+var async = require('async');
+
 /**
  * Utility Method used to retrieve an error
  **/
