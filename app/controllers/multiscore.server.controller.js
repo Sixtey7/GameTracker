@@ -163,3 +163,41 @@ exports.findAll = function (callback) {
         callback(err, result);
     });
 };
+
+/**
+ * Updates (or creates) an array of multi scores
+ **/
+exports.createOrUpdateCollection = function (multiScores, callback) {
+    console.log(('MultiScore.CreateOrUpdateCollection called with: ' + JSON.stringify(multiScores)).debug);
+
+    async.eachSeries(multiScores, function (multiScore, seriesCallback) {
+        if (multiScore.id) {
+            //this multi score has an id, it's an update
+            console.log(('Multi Score had an id: ' + multiScore.id).debug);
+            MultiScore.findByIdAndUpdate(multiScore.id, multiScore, function (err, multiScore) {
+                if (err) {
+                    seriesCallback(err);
+                }
+                else {
+                    console.log(('Multi Score : ' + multiScore.id + 'successfully updated').debug);
+                    seriesCallback();
+                }
+            });
+        }
+        else {
+            //this multi score did not have an id, it's a create
+            var newMultiScore = new MultiScore(multiScore);
+
+            console.log(('Built the new multi score entry: ' + JSON.stringify(newMultiScore)).debug);
+            newMultiScore.save(function (err) {
+                if (err) {
+                    callback(err);
+                }
+                else {
+                    console.log(('Successfully created multi score!').debug);
+                    callback();
+                }
+            });
+        }
+    })
+};
